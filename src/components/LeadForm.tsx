@@ -55,15 +55,6 @@ export function LeadForm({ className = "" }: LeadFormProps) {
 
       if (result.ok) {
         setIsSubmitted(true);
-        
-        // Fire MegaTag event
-        if (typeof window !== "undefined" && (window as any).MegaTag) {
-          (window as any).MegaTag.trackEvent("form_submit", {
-            formData: { firstName, lastName, email, phone, budget },
-            elementType: "form",
-            elementText: "Get My Free Estimate",
-          });
-        }
       }
     } catch (err) {
       setError("There was an error. Please try again.");
