@@ -37,6 +37,13 @@ export function LeadForm({ className = "" }: LeadFormProps) {
     setError("");
     setIsSubmitting(true);
 
+    // Validate all required fields are filled
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !phone.trim() || !budget) {
+      setError("Please fill in all required fields");
+      setIsSubmitting(false);
+      return;
+    }
+
     if (!isValidPhone(phone)) {
       setError("Please enter a valid 10-digit phone number");
       setIsSubmitting(false);
@@ -45,9 +52,9 @@ export function LeadForm({ className = "" }: LeadFormProps) {
 
     try {
       const result = await submitLead({
-        firstName,
-        lastName,
-        email,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
         phone,
         budget,
         serviceInterested: serviceInterested || undefined,
