@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useMegaLeadForm } from "@/hooks/useMegaLeadForm";
 
 interface LeadFormProps {
   className?: string;
@@ -15,10 +14,7 @@ export function LeadForm({ className = "" }: LeadFormProps) {
   const [budget, setBudget] = useState("");
   const [serviceInterested, setServiceInterested] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-
-  const { submit: submitLead } = useMegaLeadForm();
 
   const formatPhone = (value: string): string => {
     const digits = value.replace(/\D/g, '').slice(0, 10);
@@ -32,42 +28,26 @@ export function LeadForm({ className = "" }: LeadFormProps) {
     return value.replace(/\D/g, '').length === 10;
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // Don't prevent default initially — let MegaTag intercept the submit event
     setError("");
-    setIsSubmitting(true);
 
     // Validate all required fields are filled
     if (!firstName.trim() || !lastName.trim() || !email.trim() || !phone.trim() || !budget) {
+      e.preventDefault();
       setError("Please fill in all required fields");
-      setIsSubmitting(false);
       return;
     }
 
     if (!isValidPhone(phone)) {
+      e.preventDefault();
       setError("Please enter a valid 10-digit phone number");
-      setIsSubmitting(false);
       return;
     }
 
-    try {
-      const result = await submitLead({
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        email: email.trim(),
-        phone,
-        budget,
-        serviceInterested: serviceInterested || undefined,
-      });
-
-      if (result.ok) {
-        setIsSubmitted(true);
-      }
-    } catch (err) {
-      setError("There was an error. Please try again.");
-    }
-
-    setIsSubmitting(false);
+    // Prevent actual navigation but MegaTag already captured the submit event
+    e.preventDefault();
+    setIsSubmitted(true);
   };
 
   if (isSubmitted) {
@@ -206,10 +186,9 @@ export function LeadForm({ className = "" }: LeadFormProps) {
       
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="w-full mt-6 bg-white text-gray-900 px-6 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors disabled:opacity-50"
+        className="w-full mt-6 bg-white text-gray-900 px-6 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors"
       >
-        {isSubmitting ? "Submitting..." : "Get My Free Estimate"}
+        Get My Free Estimate
       </button>
       
       <p className="text-xs text-white/60 mt-3 text-center">
