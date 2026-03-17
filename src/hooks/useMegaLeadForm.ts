@@ -3,23 +3,6 @@
 import { useEffect, useCallback, useRef } from "react";
 
 // ============================================================================
-// CONFIGURATION
-// ============================================================================
-
-const CONFIG = {
-  CUSTOMER_ID: "d381ef69-33ec-4c11-bf98-cd9051a633b3",
-  SITE_ID: "caed0155-f895-4f47-810e-3a1944fa216c",
-  SOURCE_PROVIDER: "customer-landing-vineyard-blinds",
-  ENDPOINT: "https://analytics.gomega.ai/submission/submit",
-};
-
-const STORAGE_KEYS = {
-  VISITOR_ID: "_mega_vid",
-  SESSION_ID: "_mega_sid",
-  ATTRIBUTION: "_mega_attr",
-};
-
-// ============================================================================
 // TYPES
 // ============================================================================
 
@@ -63,6 +46,24 @@ interface SubmissionResponse {
   ok: boolean;
   id?: string;
 }
+
+interface MegaLeadFormOptions {
+  site_id: string;
+  customer_id: string;
+  source_provider: string;
+}
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+const ENDPOINT = "https://analytics.gomega.ai/submission/submit";
+
+const STORAGE_KEYS = {
+  VISITOR_ID: "_mega_vid",
+  SESSION_ID: "_mega_sid",
+  ATTRIBUTION: "_mega_attr",
+};
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -142,7 +143,6 @@ const captureAttribution = (): Attribution => {
     fbc: getCookie("_fbc"),
   };
 
-  // Generate fbc from fbclid if cookie doesn't exist
   if (attribution.fbclid && !attribution.fbc) {
     attribution.fbc = `fb.1.${Date.now()}.${attribution.fbclid}`;
   }
@@ -190,7 +190,7 @@ interface UseMegaLeadFormReturn {
   isReady: boolean;
 }
 
-export const useMegaLeadForm = (): UseMegaLeadFormReturn => {
+export function useMegaLeadForm(options: MegaLeadFormOptions): UseMegaLeadFormReturn {
   const isInitialized = useRef(false);
 
   useEffect(() => {
@@ -202,24 +202,12 @@ export const useMegaLeadForm = (): UseMegaLeadFormReturn => {
 
   const submit = useCallback(
     async (formData: Record<string, unknown>): Promise<SubmissionResponse> => {
-      // Hook-level validation
-      if (formData.phone) {
-        const phoneDigits = String(formData.phone).replace(/\D/g, "");
-        if (phoneDigits.length !== 10) {
-          throw new Error("Phone must be exactly 10 digits");
-        }
-        formData.phone = phoneDigits; // Normalize to digits only
-      }
-      if (!formData.firstName || !formData.email) {
-        throw new Error("firstName and email are required");
-      }
-
       const attribution = initAttribution();
 
       const payload: SubmissionPayload = {
-        customer_id: CONFIG.CUSTOMER_ID,
-        site_id: CONFIG.SITE_ID,
-        source_provider: CONFIG.SOURCE_PROVIDER,
+        customer_id: options.customer_id,
+        site_id: options.site_id,
+        source_provider: options.source_provider,
         form_data: formData,
         url: window.location.href,
         referrer_url: document.referrer || null,
@@ -238,7 +226,7 @@ export const useMegaLeadForm = (): UseMegaLeadFormReturn => {
         fbc: attribution.fbc,
       };
 
-      const response = await fetch(CONFIG.ENDPOINT, {
+      const response = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -250,10 +238,10 @@ export const useMegaLeadForm = (): UseMegaLeadFormReturn => {
 
       return response.json();
     },
-    []
+    [options]
   );
 
   return { submit, isReady: typeof window !== "undefined" };
-};
+}
 
 export default useMegaLeadForm;

@@ -26,6 +26,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* MegaTag config — set BEFORE optimizer loads */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.MEGA_TAG_CONFIG={siteKey:"sk_mljzmyd3_zmguftm2gh",gtmId:"GTM-WC8DBNV"};window.API_ENDPOINT="https://optimizer.gomega.ai";window.TRACKING_API_ENDPOINT="https://events-api.gomega.ai";`,
+          }}
+        />
+        <script src="https://cdn.gomega.ai/scripts/optimizer.min.js" async />
+      </head>
       <body className={inter.className}>
         {children}
 

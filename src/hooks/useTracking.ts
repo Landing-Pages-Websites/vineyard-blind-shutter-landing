@@ -23,7 +23,6 @@ export function useTracking(config: TrackingConfig) {
         gtmId: config.gtmId,
         gaId: config.gaId,
         pixelId: config.pixelId,
-        disableAutoFormTracking: true,
       };
     }
 

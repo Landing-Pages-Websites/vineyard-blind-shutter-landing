@@ -18,7 +18,11 @@ export function LeadForm({ className = "" }: LeadFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const { submit: submitLead } = useMegaLeadForm();
+  const { submit: submitLead } = useMegaLeadForm({
+    customer_id: "d381ef69-33ec-4c11-bf98-cd9051a633b3",
+    site_id: "caed0155-f895-4f47-810e-3a1944fa216c",
+    source_provider: "customer-landing-vineyard-blinds",
+  });
 
   const formatPhone = (value: string): string => {
     const digits = value.replace(/\D/g, '').slice(0, 10);
