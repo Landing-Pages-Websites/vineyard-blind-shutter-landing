@@ -33,7 +33,7 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 
 function DualCTA({ primary, href }: { primary: string; href: string }) {
   return (
-    <div className="mt-10 flex flex-col items-center gap-3">
+    <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
       <a href={href} className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors">
         {primary}
       </a>
