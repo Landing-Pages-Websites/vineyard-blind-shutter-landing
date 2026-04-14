@@ -94,7 +94,8 @@ export default function VineyardBlindShutter() {
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed">
-                Vineyard Blind & Shutter offers the lowest possible prices on plantation shutters, blinds and window coverings in all of Southern California. We bring the showroom to you.
+                Vineyard Blind & Shutter offers the lowest prices on custom plantation shutters, blinds and window coverings in Southern California.
+                Serving Temecula, Murrieta, Corona, Menifee, San Diego, and all of Riverside, San Diego & South Orange County.
               </p>
               
               <div className="flex flex-wrap gap-4 text-gray-700">
@@ -170,13 +171,13 @@ export default function VineyardBlindShutter() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <Reveal>
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl">
+              <div id="blinds" className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl scroll-mt-24">
                 <div className="w-16 h-16 bg-amber-600 rounded-xl flex items-center justify-center mb-6">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Blinds</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Custom Blinds & Window Blinds in Southern California</h3>
                 <p className="text-gray-600 mb-6">
                   With our competitive prices, you can get the stylish blinds you want with a custom fit perfect for your window. We offer quality blinds in a large selection of styles like faux wood and natural wood blinds.
                 </p>
@@ -185,13 +186,13 @@ export default function VineyardBlindShutter() {
             </Reveal>
 
             <Reveal>
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl">
+              <div id="shutters" className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl scroll-mt-24">
                 <div className="w-16 h-16 bg-amber-600 rounded-xl flex items-center justify-center mb-6">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Shutters</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Interior Shutters & Plantation Shutters Near You</h3>
                 <p className="text-gray-600 mb-6">
                   We offer a large selection of sun protection, energy efficient, high quality shutters. Our shutters range from Polycore to Stained Wood and specialty shapes to fit your home needs.
                 </p>
@@ -200,13 +201,13 @@ export default function VineyardBlindShutter() {
             </Reveal>
 
             <Reveal>
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl">
+              <div id="shades" className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl scroll-mt-24">
                 <div className="w-16 h-16 bg-amber-600 rounded-xl flex items-center justify-center mb-6">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Shades</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Custom Window Shades & Coverings</h3>
                 <p className="text-gray-600 mb-6">
                   We offer a variety of shades to enhance the look or style of your home. You can choose from Honeycomb shades that offer privacy and blackout to woven woods that are aesthetically pleasing.
                 </p>
